@@ -5,13 +5,14 @@
 using namespace glm;
 using namespace bray;
 
-bool sphere::hit(const Ray& r, float t_min, float t_max, hit_record& rec)
+bool sphere::hit(const Ray& r, float t_min, float t_max, hit_record& rec) const
 {
 	vec3 oc = r.Origin() - center;
 	float a = dot(r.Direction(), r.Direction());
 	float b = 2.0f * dot(oc, r.Direction());
 	float c = dot(oc, oc) -(radius * radius);
 	float discriminant = b * b - 4 * a*c;
+	rec.mat_ptr = mat_ptr;
 
 	if (discriminant > 0.0f)
 	{

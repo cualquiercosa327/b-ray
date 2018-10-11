@@ -2,7 +2,7 @@
 
 using namespace bray;
 
-bool hitable_list::hit(const Ray& r, float t_min, float t_max, hit_record& rec)
+bool hitable_list::hit(const Ray& r, float t_min, float t_max, hit_record& rec) const
 {
 	hit_record temp_rec;
 	bool hit_anything = false;

@@ -32,3 +32,9 @@
 *.app
 b-ray/intermediate/
 b-ray/executable/
+b-ray/imgui.ini
+*.ipch
+*.suo
+*.db
+*.json
+*.sqlite
