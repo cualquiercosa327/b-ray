@@ -5,8 +5,16 @@
 using namespace bray;
 using namespace glm;
 
+#define M_PI 3.14159265359f
+
+inline float drand48()
+{
+	return(rand() / (RAND_MAX + 1.0));
+}
+
 vec3 random_in_unit_sphere()
 {
+	/*
 	static std::default_random_engine gen;
 	static std::uniform_real_distribution<float> random(0.0f, 1.0f);
 
@@ -15,6 +23,13 @@ vec3 random_in_unit_sphere()
 	{
 		p = 2.0f * vec3(random(gen), random(gen), random(gen)) - vec3(1.0f, 1.0f, 1.0f);
 	} while (length(p) > 1.0f);
+	return p;
+	*/
+
+	vec3 p;
+	do {
+		p = 2.0f * vec3(drand48(), drand48(), 0) - vec3(1, 1, 0);
+	} while (dot(p, p) >= 1.0);
 	return p;
 }
 
@@ -55,7 +70,8 @@ bool metal::scatter(
 	Ray& scattered)
 {
 	vec3 reflected = reflect(normalize(r_in.Direction()), rec.normal);
-	scattered = Ray(rec.p, reflected + fuzz*random_in_unit_sphere());
+	//scattered = Ray(rec.p, reflected + fuzz*random_in_unit_sphere());
+	scattered = Ray(rec.p, reflected);
 	attenuation = albedo;	
 	return dot(scattered.Direction(), rec.normal) > 0.0f;
 }
